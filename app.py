@@ -1,13 +1,14 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from datetime import datetime
 import os
 
 #init app
 app = Flask(__name__)
 
 # Database config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rest.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///new.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Init db -- sqlalchemy
 db = SQLAlchemy(app)
@@ -20,6 +21,7 @@ class Classroom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(128), unique=True, nullable=False)
     action = db.Column(db.String(256))
+    post_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, url, action):
         self.url = url
@@ -28,7 +30,7 @@ class Classroom(db.Model):
 # The Schema
 class ClassSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'url', 'action')
+        fields = ('id', 'url', 'action', 'post_date')
 
 # Init schema
 class_schema = ClassSchema() # one object
@@ -37,7 +39,7 @@ classes_schema =  ClassSchema(many=True) # Many Objects
 ## Routes
 @app.route('/')
 def index():
-    return 'Api Tutorial'
+    return 'Api Tutorial' + temp
 
  # Create a Class   
 @app.route('/class', methods=['POST'])
