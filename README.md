@@ -20,8 +20,11 @@
 2. Go to **Headers** in the postman client and set **Content-Type** to **application/json**
 3. Go to **Body** and input the url and action in a JSON format with keys 'url' and 'action' eg 
 >{
->    "url": "crowdclassroom.com"
+>
+>    "url": "crowdclassroom.com",
+>
 >    "action": "Created crowdclassroom"
+>
 >}
 4. Hit **Send**
 #### NOTE
