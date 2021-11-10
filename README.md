@@ -1,4 +1,4 @@
-# API Documentation
+# API Documentation (First Prototype)
 ## This is an API that facilitates creation of classrooms
 ### Requirements
 - An API interactve client eg Postman or RapidAPI.
